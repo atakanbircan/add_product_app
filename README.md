@@ -1,6 +1,6 @@
 # add_product_app
 #
-#
+## Dummyjson API dan GET ve POST metodları yardımıyla veri çeker ya da sepete ürün ekler.
 | Tool | Version |
 | ---            | --- | 
 |   Android SDK  | 33     |
