@@ -17,7 +17,7 @@ class MyAdapter(private val context: Context,private val itemList:List<Productt>
 
     lateinit var txtTitle: TextView
     lateinit var imgProduct: ImageView
-    lateinit var txtDescrition: TextView
+
     lateinit var txtPrice: TextView
     lateinit var txtRate: TextView
 
@@ -38,15 +38,15 @@ class MyAdapter(private val context: Context,private val itemList:List<Productt>
         val view = inflater.inflate(R.layout.list_item,p2,false)
 
         txtTitle= view.findViewById(R.id.txtTitle)
-        txtDescrition = view.findViewById(R.id.txtDescription)
+
         txtPrice = view.findViewById(R.id.txtPrice)
         txtRate = view.findViewById(R.id.txtRate)
         imgProduct = view.findViewById(R.id.imgProduct)
 
         txtTitle.text = itemList[position].title
-        txtDescrition.text = itemList[position].description
-        txtPrice.text = itemList[position].price.toString()
-        txtRate.text = itemList[position].rating.toString()
+
+        txtPrice.text = "Price : ${itemList[position].price.toString()}"
+        txtRate.text = "Rate : ${itemList[position].rating.toString()}"
 
         Glide.with(view).load(itemList[position].images[0]).into(imgProduct)
 

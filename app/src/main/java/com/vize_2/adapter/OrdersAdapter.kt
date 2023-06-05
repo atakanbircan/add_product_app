@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.vize_2.R
 import com.vize_2.model.Product
 import com.vize_2.model.Productt
@@ -17,6 +18,7 @@ class OrdersAdapter(private val context: Context, private val itemList:List<Prod
     lateinit var txtCartDiscountedPrice: TextView
     lateinit var txtCartQuantity: TextView
     lateinit var txtCartPrice: TextView
+
 
 
     override fun getCount(): Int {
@@ -42,9 +44,12 @@ class OrdersAdapter(private val context: Context, private val itemList:List<Prod
 
 
         txtCartTitle.text = itemList[p0].title
-        txtCartQuantity.text = itemList[p0].quantity.toString()
-        txtCartPrice.text = itemList[p0].price.toString()
-        txtCartDiscountedPrice.text = itemList[p0].discountedPrice.toString()
+        txtCartQuantity.text = "Quantity : ${itemList[p0].quantity.toString()}"
+        txtCartPrice.text = "Price :  ${itemList[p0].price.toString()}"
+        txtCartDiscountedPrice.text = "Discount : ${itemList[p0].discountedPrice.toString()}"
+
+
+
 
         return view
     }

@@ -34,12 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         //cartService=ApiClient.getClient().create(CartService::class.java)
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+
         productService = ApiClient.getClient().create(ProductService::class.java)
         productService.getProducts("100").enqueue(object :Callback<DummyProducts>{
             override fun onResponse(call: Call<DummyProducts>, response: Response<DummyProducts>) {
                 val datas = response.body()?.products
                 list= datas!!
                 datas?.let {
+                    binding.txtMainTitle.text="Products"
                     val myAdapter = MyAdapter(this@MainActivity, itemList =datas)
                     myAdapter.notifyDataSetChanged()
                     binding.listViewProducts.adapter=myAdapter
@@ -61,14 +69,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         )
-    }
-
-    override fun onStart() {
 
 
-
-
-        super.onStart()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -80,30 +82,14 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if (item.itemId==R.id.siparisler){
             //intent.getStringExtra("data1")?.let {
+            intent =Intent(this@MainActivity,OrdersActivity::class.java)
+            startActivity(intent)
 
-            binding.listViewProducts.visibility=View.GONE
-            cartService = ApiClient.getClient().create(CartService::class.java)
-            cartService.getUserCarts(1).enqueue(object : Callback<UserCarts>{
-                override fun onResponse(call: Call<UserCarts>, response: Response<UserCarts>) {
-                    response.body()?.let {
-                        val datalist = response.body()!!.carts[0].products
-                        val adapter =OrdersAdapter(this@MainActivity, datalist)
-                            //ArrayAdapter(this@MainActivity, android.R.layout.simple_list_item_1, datas)
-                        binding.listViewProducts.adapter = adapter
-                        binding.listViewProducts.visibility = View.VISIBLE
-                    }
-                    }
-
-                override fun onFailure(call: Call<UserCarts>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-
-            })
 
         }
         return super.onOptionsItemSelected(item)

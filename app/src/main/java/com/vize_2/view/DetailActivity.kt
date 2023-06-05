@@ -3,6 +3,7 @@ package com.vize_2.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.vize_2.config.ApiClient
 import com.vize_2.databinding.ActivityDetailBinding
@@ -27,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         intent.getStringExtra("data")?.let {
             var id = it
 
-            cartService = ApiClient.getClient().create(CartService::class.java)
+
             productService = ApiClient.getClient().create(ProductService::class.java)
 
             productService.singleProduct(id).enqueue(object : Callback<Productt> {
@@ -52,10 +53,11 @@ class DetailActivity : AppCompatActivity() {
             })
 
             binding.btnSepeteEkle.setOnClickListener {
-
-
                 val cart = Cart(1,listOf(CartProduct(id.toInt(),1)))
+                cartService = ApiClient.getClient().create(CartService::class.java)
                 cartService.addCart(cart)
+
+                //cartService.addCart(cart)
 
                 var intent =
                     Intent(this@DetailActivity, MainActivity::class.java)
